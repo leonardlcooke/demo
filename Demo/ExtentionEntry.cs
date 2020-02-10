@@ -15,6 +15,8 @@ namespace Demo
         public void Initialize(IApplicationExtendor extendor)
         {
             ServiceLocator.Instance.VerifyAllDependenciesResolve();
+
+            extendor.AddPage(Menu.Associates, "V1.1", "MyView");
         }
     }
 }
