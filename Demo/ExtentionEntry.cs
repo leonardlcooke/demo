@@ -16,7 +16,7 @@ namespace Demo
         {
             ServiceLocator.Instance.VerifyAllDependenciesResolve();
 
-            extendor.AddPage(Menu.Associates, "V1.1", "MyView");
+            extendor.AddPage(Menu.Associates, "V1.2", "MyView");
         }
     }
 }
