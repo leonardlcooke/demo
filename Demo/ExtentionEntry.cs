@@ -16,7 +16,7 @@ namespace Demo
 
         public void Initialize(IApplicationExtendor extendor)
         {
-            extendor.AddPage(Menu.Associates, "V1", "V1");
+            extendor.AddPage(Menu.Associates, "V2", "V2");
         }
     }
 }
