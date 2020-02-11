@@ -1,7 +1,9 @@
 ﻿using Disco;
 using Disco.Extensions.Abstractions.Hooks;
-using Disco.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Disco.Extensions.Abstractions.Associates.Services;
+using Disco.Extensions.Abstractions.Hooks.Associates.Enrollment;
+using Disco.Extensions.Abstractions.Corporate.Services;
 
 namespace Demo
 {
@@ -14,9 +16,7 @@ namespace Demo
 
         public void Initialize(IApplicationExtendor extendor)
         {
-            ServiceLocator.Instance.VerifyAllDependenciesResolve();
-
-            extendor.AddPage(Menu.Associates, "V1.4", "MyView");
+            
         }
     }
 }
