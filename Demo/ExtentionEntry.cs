@@ -1,9 +1,5 @@
-﻿using Disco;
-using Disco.Extensions.Abstractions.Hooks;
+﻿using DirectScale.Disco.Extension;
 using Microsoft.Extensions.DependencyInjection;
-using Disco.Extensions.Abstractions.Associates.Services;
-using Disco.Extensions.Abstractions.Hooks.Associates.Enrollment;
-using Disco.Extensions.Abstractions.Corporate.Services;
 
 namespace Demo
 {
@@ -14,9 +10,18 @@ namespace Demo
             
         }
 
-        public void Initialize(IApplicationExtendor extendor)
+        public void Initialize(IExtendor extendor)
         {
-            extendor.AddPage(Menu.Associates, "V2", "V2");
+            //extendor.AddPage(Menu.Associates, "V2", "V2")
+            extendor.Hooks.Associates.Enrollment.GetNewBackOfficeId.Override = (r, f) =>
+            {
+                var res = f(r);
+
+                return new DirectScale.Disco.Extension.Hooks.Associates.Enrollment.SetBackOfficeIdHookResponse
+                {
+                    BackOfficeId = res.BackOfficeId
+                };
+            };
         }
     }
 }
