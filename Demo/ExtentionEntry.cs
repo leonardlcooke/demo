@@ -23,6 +23,16 @@ namespace Demo
                 };
             };
 
+            extendor.Hooks.Merchants.ExtendedMerchantHooks.GetMerchantInfos.Override = (r, f) =>
+            {
+                var res = f(r);
+
+                return new DirectScale.Disco.Extension.Hooks.Merchants.ExtendedMerchants.GetExtendedMerchantsHookResponse
+                {
+                    MerchantInfos = res.MerchantInfos
+                };
+            };
+
             System.Func<TestRequest, string> v1 = (r) =>
             {
                 return $"true - {r.Value}";
