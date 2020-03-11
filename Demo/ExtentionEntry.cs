@@ -28,7 +28,7 @@ namespace Demo
                 return $"true - {r.Value}";
             };
 
-            extendor.AddAPI<TestRequest>("test/v1", v1);
+            //extendor.AddAPI<TestRequest>("test/v1", v1);
         }
     }
 
