@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Demo
 {
-    public class ExtensionEntry : IExtensionBase
+    public class ExtensionEntry : IExtension
     {
         public void ConfigureServices(IServiceCollection services)
         {
@@ -22,6 +22,18 @@ namespace Demo
                     BackOfficeId = res.BackOfficeId
                 };
             };
+
+            System.Func<TestRequest, string> v1 = (r) =>
+            {
+                return $"true - {r.Value}";
+            };
+
+            extendor.AddAPI<TestRequest>("test/v1", v1);
         }
+    }
+
+    public class TestRequest : RequestBase
+    {
+        public string Value { get; set; }
     }
 }
