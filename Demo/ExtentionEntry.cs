@@ -1,5 +1,7 @@
-﻿using DirectScale.Disco.Extension;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using DirectScale.Disco.Extension;
+using DirectScale.Disco.Extension.Hooks.Merchants.ExtendedMerchants;
+using DirectScale.Disco.Extension.Hooks;
 
 namespace Demo
 {
@@ -7,7 +9,7 @@ namespace Demo
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddSingleton<IHook<GetExtendedMerchantsHookRequest, GetExtendedMerchantsHookResponse>, GetMerchantHook>();
         }
 
         public void Initialize(IExtendor extendor)
@@ -20,16 +22,6 @@ namespace Demo
                 return new DirectScale.Disco.Extension.Hooks.Associates.Enrollment.SetBackOfficeIdHookResponse
                 {
                     BackOfficeId = res.BackOfficeId
-                };
-            };
-
-            extendor.Hooks.Merchants.ExtendedMerchantHooks.GetMerchantInfos.Override = (r, f) =>
-            {
-                var res = f(r);
-
-                return new DirectScale.Disco.Extension.Hooks.Merchants.ExtendedMerchants.GetExtendedMerchantsHookResponse
-                {
-                    MerchantInfos = res.MerchantInfos
                 };
             };
 
