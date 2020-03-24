@@ -11,6 +11,7 @@ namespace Demo
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IDemoService, DemoService>();
             services.AddSingleton<IHook<GetExtendedMerchantsHookRequest, GetExtendedMerchantsHookResponse>, GetMerchantHook>();
 
             services.AddSingleton<IApiEndpoint, Endpoint1>();

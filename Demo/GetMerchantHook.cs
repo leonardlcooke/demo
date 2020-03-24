@@ -7,6 +7,13 @@ namespace Demo
 {
     public class GetMerchantHook : IHook<GetExtendedMerchantsHookRequest, GetExtendedMerchantsHookResponse>
     {
+        private readonly IDemoService _demoService;
+
+        public GetMerchantHook(IDemoService demoService)
+        {
+            _demoService = demoService;
+        }
+
         public GetExtendedMerchantsHookResponse Invoke(GetExtendedMerchantsHookRequest request, Func<GetExtendedMerchantsHookRequest, GetExtendedMerchantsHookResponse> func)
         {
             var res = func(request);
@@ -22,7 +29,7 @@ namespace Demo
                         CanCharge = true,
                         Currency = "UsD",
                         DisplayText = "Demo Merchant",
-                        Name = "DemoMerchant",
+                        Name = _demoService.GetValue(),
                         CanSavePayments = false
                     }
                 }
