@@ -3,7 +3,8 @@ using DirectScale.Disco.Extension;
 using DirectScale.Disco.Extension.Hooks.Merchants.ExtendedMerchants;
 using DirectScale.Disco.Extension.Hooks;
 
-namespace Demo
+namespace Demo.Hooks
+
 {
     public class GetMerchantHook : IHook<GetExtendedMerchantsHookRequest, GetExtendedMerchantsHookResponse>
     {
