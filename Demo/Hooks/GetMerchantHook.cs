@@ -10,7 +10,7 @@ namespace Demo.Hooks
     {
         private readonly IDemoService _demoService;
 
-        public GetMerchantHook(IDemoService demoService)
+        public GetMerchantHook(IDemoService demoService, DirectScale.Disco.Extension.Services.IAssociateService associateService)
         {
             _demoService = demoService;
         }
