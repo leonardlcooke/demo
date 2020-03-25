@@ -15,7 +15,7 @@ namespace Demo.Views
             };
         }
 
-        public View GetView(HttpRequest request)
+        public View GetView(ApiRequest request)
         {
             return new View
             {

@@ -1,5 +1,4 @@
-﻿using System.Web;
-using DirectScale.Disco.Extension.Api;
+﻿using DirectScale.Disco.Extension.Api;
 
 namespace Demo.Api
 {
@@ -9,14 +8,14 @@ namespace Demo.Api
         {
             return new ApiDefinition
             {
-                Endpoint = "v2/custom/end1",
+                Route = "v2/custom/end1",
                 RequireAuthentication = true
             };
         }
 
-        public object Post(HttpRequest request)
+        public string Post(ApiRequest request)
         {
-            return new { Status = 1, Message = "Success" };
+            return "Success";
         }
     }
 }
