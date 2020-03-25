@@ -13,9 +13,9 @@ namespace Demo.Api
             };
         }
 
-        public string Post(ApiRequest request)
+        public IApiResponse Post(ApiRequest request)
         {
-            return "Success";
+            return new Ok(new { Status = 1, Message = "Success" });
         }
     }
 }

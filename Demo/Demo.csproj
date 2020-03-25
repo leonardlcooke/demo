@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DirectScale.Disco.Extension.Abstractions" Version="1.0.24" />
+    <PackageReference Include="DirectScale.Disco.Extension.Abstractions" Version="1.0.26" />
   </ItemGroup>
 
 </Project>
