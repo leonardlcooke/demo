@@ -25,7 +25,7 @@ namespace Demo
                     new ExtendedMerchant
                     {
                         Autoship = false,
-                        Id = 322,
+                        Id = 9322,
                         CanCharge = true,
                         Currency = "UsD",
                         DisplayText = "Demo Merchant",
