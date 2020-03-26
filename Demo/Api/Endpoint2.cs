@@ -8,14 +8,14 @@ namespace Demo.Api
         {
             return new ApiDefinition
             {
-                Route = "v2/custom/end2",
+                Route = "end2",
                 RequireAuthentication = false
             };
         }
 
         public IApiResponse Post(ApiRequest request)
         {
-            return new Ok(new { Status = 2, Message = "Success" });
+            return new Ok(new { Status = 2, Message = "This is working." });
         }
     }
 }

@@ -16,8 +16,8 @@ namespace Demo.Api
         {
             return new ApiDefinition
             {
-                Route = "v2/custom/end1",
-                RequireAuthentication = true
+                Route = "end1",
+                RequireAuthentication = false
             };
         }
 
