@@ -1,9 +1,17 @@
 ﻿using DirectScale.Disco.Extension.Api;
+using DirectScale.Disco.Extension.Services;
 
 namespace Demo.Api
 {
     public class Endpoint1 : IApiEndpoint
     {
+        private readonly IAssociateService _associateService;
+
+        public Endpoint1(IAssociateService associateService)
+        {
+            _associateService = associateService;
+        }
+
         public ApiDefinition GetDefinition()
         {
             return new ApiDefinition
@@ -15,7 +23,17 @@ namespace Demo.Api
 
         public IApiResponse Post(ApiRequest request)
         {
-            return new Ok(new { Status = 1, Message = "Success" });
+            var rObject = RequestParser.ParseBody<E1Request>(request);
+
+            var aName = _associateService.GetAssociate(rObject.BackOfficeId).Name;
+
+            return new Ok(new { Status = 1, RequestMessage = rObject.Message, AssociateName = aName });
         }
+    }
+
+    public class E1Request
+    {
+        public string Message { get; set; }
+        public string BackOfficeId { get; set; }
     }
 }
