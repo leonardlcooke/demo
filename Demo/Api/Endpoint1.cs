@@ -6,10 +6,12 @@ namespace Demo.Api
     public class Endpoint1 : IApiEndpoint
     {
         private readonly IAssociateService _associateService;
+        private readonly IRequestParsingService _requestParsing;
 
-        public Endpoint1(IAssociateService associateService)
+        public Endpoint1(IAssociateService associateService, IRequestParsingService requestParsing)
         {
             _associateService = associateService;
+            _requestParsing = requestParsing;
         }
 
         public ApiDefinition GetDefinition()
@@ -23,7 +25,7 @@ namespace Demo.Api
 
         public IApiResponse Post(ApiRequest request)
         {
-            var rObject = RequestParser.ParseBody<E1Request>(request);
+            var rObject = _requestParsing.ParseBody<E1Request>(request);
 
             var aName = _associateService.GetAssociate(rObject.BackOfficeId).Name;
 
