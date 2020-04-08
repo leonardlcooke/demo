@@ -11,7 +11,15 @@ namespace Demo.Api
 
         public override IApiResponse Post(Endpoint3Request request)
         {
-            throw new System.NotImplementedException();
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var resourceName = "Demo.Html.htmlpage.html";
+            using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
+            {
+                string data = reader.ReadToEnd();
+
+                return new Ok(new { data });
+            }
         }
     }
 }
