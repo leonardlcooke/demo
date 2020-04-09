@@ -11,14 +11,22 @@ namespace Demo.Views
 
         public override ViewTemplate<View2Model> GetTemplate(ViewDefinition definition, ApiRequest request)
         {
-            return new ViewTemplate<View2Model>
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var resourceName = "Demo.Html.htmlpage.html";
+            using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
             {
-                Html = "<head></head><body><h1>View1 {{PageTitle}}</h1></body>",
-                Model = new View2Model
+                string data = reader.ReadToEnd();
+
+                return new ViewTemplate<View2Model>
                 {
-                    PageTitle = "Page Title"
-                }
-            };
+                    Html = data,
+                    Model = new View2Model
+                    {
+                        PageTitle = "Page Title"
+                    }
+                };
+            }
         }
     }
 }

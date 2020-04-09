@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DirectScale.Disco.Extension.Abstractions" Version="1.0.31" />
+    <PackageReference Include="DirectScale.Disco.Extension.Abstractions" Version="1.0.32" />
   </ItemGroup>
 
 </Project>
