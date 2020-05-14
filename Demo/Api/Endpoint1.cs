@@ -7,11 +7,13 @@ namespace Demo.Api
     {
         private readonly IAssociateService _associateService;
         private readonly IRequestParsingService _requestParsing;
+        private readonly IDataService _dataService;
 
-        public Endpoint1(IAssociateService associateService, IRequestParsingService requestParsing)
+        public Endpoint1(IAssociateService associateService, IDataService dataService, IRequestParsingService requestParsing)
         {
             _associateService = associateService;
             _requestParsing = requestParsing;
+            _dataService = dataService;
         }
 
         public ApiDefinition GetDefinition()
@@ -25,6 +27,8 @@ namespace Demo.Api
 
         public IApiResponse Post(ApiRequest request)
         {
+            var conString = _dataService.ConnectionString.ConnectionString;
+
             var clientId = System.Environment.GetEnvironmentVariable("client");
             var rObject = _requestParsing.ParseBody<E1Request>(request);
             var aName = _associateService.GetAssociate(rObject.BackOfficeId).Name;
