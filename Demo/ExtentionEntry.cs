@@ -17,16 +17,11 @@ namespace Demo
         {
             services.AddSingleton<IDemoService, DemoService>();
 
-
-
             services.AddSingleton<IApiEndpoint, Endpoint1>();
             services.AddSingleton<IApiEndpoint, Endpoint2>();
             services.AddSingleton<IApiEndpoint, Endpoint3>();
 
             services.AddScoped<IMoneyInMerchant, ExampleRedirectMerchant>();
-
-            // Inject IDbConnection, with implementation from SqlConnection class.
-            services.AddTransient<IDbConnection>((sp) => new SqlConnection(sp.GetService<IDataService>().ConnectionString.ConnectionString));
         }
     }
 }

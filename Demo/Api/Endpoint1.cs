@@ -10,13 +10,13 @@ namespace Demo.Api
     {
         private readonly IAssociateService _associateService;
         private readonly IRequestParsingService _requestParsing;
-        private readonly IDbConnection _dbConnection;
+        private readonly IDataService _dataService;
 
-        public Endpoint1(IAssociateService associateService, IDbConnection dbConnection, IRequestParsingService requestParsing)
+        public Endpoint1(IAssociateService associateService, IDataService dataService, IRequestParsingService requestParsing)
         {
             _associateService = associateService;
             _requestParsing = requestParsing;
-            _dbConnection = dbConnection;
+            _dataService = dataService;
         }
 
         public ApiDefinition GetDefinition()
@@ -30,14 +30,17 @@ namespace Demo.Api
 
         public IApiResponse Post(ApiRequest request)
         {
-            var rObject = _requestParsing.ParseBody<E1Request>(request);
-            //var aName = _associateService.GetAssociate(rObject.BackOfficeId).Name;
+            using (var dbConnection = new System.Data.SqlClient.SqlConnection(_dataService.ConnectionString.ConnectionString))
+            {
+                var rObject = _requestParsing.ParseBody<E1Request>(request);
+                //var aName = _associateService.GetAssociate(rObject.BackOfficeId).Name;
 
-            var sql = $"select FirstName, LastName, BackOfficeId from CRM_Distributors where recordnumber = '{rObject.BackOfficeId}'"; //Note. This is subject to SQL Injection. Do not use in production.
-            var qryRes = _dbConnection.Query<QryResult>(sql).FirstOrDefault();
-            var aName = $"{qryRes.FirstName} {qryRes.LastName}";
+                var sql = $"select FirstName, LastName, BackOfficeId from CRM_Distributors where recordnumber = '{rObject.BackOfficeId}'"; //Note. This is subject to SQL Injection. Do not use in production.
+                var qryRes = dbConnection.Query<QryResult>(sql).FirstOrDefault();
+                var aName = $"{qryRes.FirstName} {qryRes.LastName}";
 
-            return new Ok(new { Status = 1, RequestMessage = rObject.Message, AssociateName = aName });
+                return new Ok(new { Status = 1, RequestMessage = rObject.Message, AssociateName = aName });
+            }
         }
     }
 
