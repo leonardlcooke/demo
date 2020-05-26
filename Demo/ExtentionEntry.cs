@@ -5,6 +5,9 @@ using DirectScale.Disco.Extension.Api;
 using Demo.Views;
 using Demo.Api;
 using Demo.Merchants;
+using System.Data;
+using System.Data.SqlClient;
+using DirectScale.Disco.Extension.Services;
 
 namespace Demo
 {
@@ -21,6 +24,9 @@ namespace Demo
             services.AddSingleton<IApiEndpoint, Endpoint3>();
 
             services.AddScoped<IMoneyInMerchant, ExampleRedirectMerchant>();
+
+            // Inject IDbConnection, with implementation from SqlConnection class.
+            services.AddTransient<IDbConnection>((sp) => new SqlConnection(sp.GetService<IDataService>().ConnectionString.ConnectionString));
         }
     }
 }

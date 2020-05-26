@@ -11,6 +11,8 @@ namespace Demo.Api
 
         public override IApiResponse Post(Endpoint3Request request)
         {
+            var clientId = System.Environment.GetEnvironmentVariable("client");
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             var resourceName = "Demo.Html.htmlpage.html";
             using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourceName))

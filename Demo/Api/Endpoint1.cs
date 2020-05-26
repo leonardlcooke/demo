@@ -1,5 +1,8 @@
-﻿using DirectScale.Disco.Extension.Api;
+﻿using Dapper;
+using DirectScale.Disco.Extension.Api;
 using DirectScale.Disco.Extension.Services;
+using System.Data;
+using System.Linq;
 
 namespace Demo.Api
 {
@@ -7,13 +10,13 @@ namespace Demo.Api
     {
         private readonly IAssociateService _associateService;
         private readonly IRequestParsingService _requestParsing;
-        private readonly IDataService _dataService;
+        private readonly IDbConnection _dbConnection;
 
-        public Endpoint1(IAssociateService associateService, IDataService dataService, IRequestParsingService requestParsing)
+        public Endpoint1(IAssociateService associateService, IDbConnection dbConnection, IRequestParsingService requestParsing)
         {
             _associateService = associateService;
             _requestParsing = requestParsing;
-            _dataService = dataService;
+            _dbConnection = dbConnection;
         }
 
         public ApiDefinition GetDefinition()
@@ -27,14 +30,22 @@ namespace Demo.Api
 
         public IApiResponse Post(ApiRequest request)
         {
-            var conString = _dataService.ConnectionString.ConnectionString;
-
-            var clientId = System.Environment.GetEnvironmentVariable("client");
             var rObject = _requestParsing.ParseBody<E1Request>(request);
-            var aName = _associateService.GetAssociate(rObject.BackOfficeId).Name;
+            //var aName = _associateService.GetAssociate(rObject.BackOfficeId).Name;
 
-            return new Ok(new { Status = 1, RequestMessage = rObject.Message, AssociateName = aName, client = clientId });
+            var sql = $"select FirstName, LastName, BackOfficeId from CRM_Distributors where recordnumber = '{rObject.BackOfficeId}'"; //Note. This is subject to SQL Injection. Do not use in production.
+            var qryRes = _dbConnection.Query<QryResult>(sql).FirstOrDefault();
+            var aName = $"{qryRes.FirstName} {qryRes.LastName}";
+
+            return new Ok(new { Status = 1, RequestMessage = rObject.Message, AssociateName = aName });
         }
+    }
+
+    public class QryResult
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string BackOfficeId { get; set; }
     }
 
     public class E1Request
