@@ -19,7 +19,7 @@ namespace Demo.Api
 
         public IApiResponse Post(ApiRequest request)
         {
-            return new Ok(new { name = "Hello World!", requestBody = request.Body });
+            return new ApiResponse { Content = null, MediaType = "JSON", StatusCode = System.Net.HttpStatusCode.BadRequest };
         }
     }
 }
