@@ -20,7 +20,7 @@ namespace Demo
             services.AddSingleton<IApiEndpoint, Endpoint1>();
             services.AddSingleton<IApiEndpoint, Endpoint2>();
             services.AddSingleton<IApiEndpoint, Endpoint3>();
-            services.AddSingleton<IApiEndpoint, MobileCoach>();
+            services.AddSingleton<IApiEndpoint, MobileCoachEndpoint>();
 
             services.AddScoped<IMoneyInMerchant, ExampleRedirectMerchant>();
         }
