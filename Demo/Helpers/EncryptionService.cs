@@ -10,7 +10,7 @@ namespace Demo.Helpers
         string SetShaOneString(string stringToHash);
     }
 
-    public class EncryptionService
+    public class EncryptionService : IEncryptionService
     {
         public string SetShaOneString(string stringToHash)
         {

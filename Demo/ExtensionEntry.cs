@@ -8,6 +8,7 @@ using Demo.Merchants;
 using System.Data;
 using System.Data.SqlClient;
 using DirectScale.Disco.Extension.Services;
+using Demo.Helpers;
 
 namespace Demo
 {
@@ -21,8 +22,10 @@ namespace Demo
             services.AddSingleton<IApiEndpoint, Endpoint2>();
             services.AddSingleton<IApiEndpoint, Endpoint3>();
             services.AddSingleton<IApiEndpoint, MobileCoachEndpoint>();
+            services.AddSingleton<IEncryptionService, EncryptionService>();
 
             services.AddScoped<IMoneyInMerchant, ExampleRedirectMerchant>();
+
         }
     }
 }
