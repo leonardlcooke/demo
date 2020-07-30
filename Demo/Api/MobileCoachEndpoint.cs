@@ -3,6 +3,7 @@ using Demo.Helpers;
 using Demo.PartnerIntegrations;
 using DirectScale.Disco.Extension.Api;
 using DirectScale.Disco.Extension.Services;
+using System.Text;
 
 namespace Demo.Api
 {
@@ -36,7 +37,7 @@ namespace Demo.Api
             // Validate the request just a little
             if (rObject == null || rObject.AssociateId == 0)
             {
-                return new ApiResponse { Content = null, MediaType = "JSON", StatusCode = System.Net.HttpStatusCode.NotFound };
+                return new ApiResponse { Content = Encoding.Unicode.GetBytes("Nothing"), MediaType = "JSON", StatusCode = System.Net.HttpStatusCode.NotFound };
             }
             var mobileCoachService = new MobileCoachService(_associateService, _encryptionService);
             
