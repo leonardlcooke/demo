@@ -26,6 +26,10 @@ namespace Demo
 
             services.AddScoped<IMoneyInMerchant, ExampleRedirectMerchant>();
 
+            // Transient: Create a new one every time.
+            // Singleton: Once in life of service. Cleared when IIS restarts.
+            // Scoped: Once per HTTPContext request
+
         }
     }
 }

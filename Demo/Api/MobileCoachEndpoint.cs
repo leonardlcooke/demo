@@ -42,7 +42,9 @@ namespace Demo.Api
             }
             var mobileCoachService = new MobileCoachService(_associateService, _encryptionService);
 
-            return new Ok(mobileCoachService.GetMobileCoachChecksum(rObject.AssociateId));
+            //var returnObject = new Ok(mobileCoachService.GetMobileCoachChecksum(rObject.AssociateId));
+            
+            return new Ok( mobileCoachService.GetMobileCoachChecksum(rObject.AssociateId) );
         }
     }
 }
