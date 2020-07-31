@@ -41,7 +41,7 @@ namespace Demo.PartnerIntegrations
             return new MobileCoachResponse
             {
                 Token = _token,
-                Checksum = encodedUrl,
+                Checksum = urlHash,  //encodedUrl,
                 User = mobileUser
             };
         }
