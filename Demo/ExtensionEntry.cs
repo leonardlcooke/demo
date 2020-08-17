@@ -2,13 +2,11 @@
 using DirectScale.Disco.Extension;
 using DirectScale.Disco.Extension.Hooks;
 using DirectScale.Disco.Extension.Api;
-using Demo.Views;
 using Demo.Api;
 using Demo.Merchants;
-using System.Data;
-using System.Data.SqlClient;
-using DirectScale.Disco.Extension.Services;
 using MobileCoach;
+using DirectScale.Disco.Extension.Hooks.Associates.Enrollment;
+using Demo.Hooks;
 
 namespace Demo
 {
@@ -31,6 +29,8 @@ namespace Demo
                 UrlKey = "134a9bac6f4532fe75399b2371377313e780698797b2dc4ba72fbe425da27db4",
                 BaseUrl = "https://qa.mobilecoach.com/widgets/" //"https://admin.mobilecoach.com/widgets/"
             });
+
+            services.AddTransient < IHook < IsEmailAvailableHookRequest, IsEmailAvailableHookResponse >, IsEmailAvailableHook >();
 
             // Transient: Create a new one every time.
             // Singleton: Once in life of service. Cleared when IIS restarts.
