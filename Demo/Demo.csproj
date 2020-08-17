@@ -18,14 +18,11 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.35" />
     <PackageReference Include="DirectScale.Disco.Extension.Abstractions" Version="1.0.91-feature" />
+    <PackageReference Include="MobileCoach_DirectScale_Integration" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Hooks\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\MobileCoachDirectScale\MobileCoachDirectScale\MobileCoachDirectScale.csproj" />
   </ItemGroup>
 
   <ItemGroup>
