@@ -8,7 +8,7 @@ using Demo.Merchants;
 using System.Data;
 using System.Data.SqlClient;
 using DirectScale.Disco.Extension.Services;
-using Demo.Helpers;
+using MobileCoach;
 
 namespace Demo
 {
@@ -21,15 +21,20 @@ namespace Demo
             services.AddSingleton<IApiEndpoint, Endpoint1>();
             services.AddSingleton<IApiEndpoint, Endpoint2>();
             services.AddSingleton<IApiEndpoint, Endpoint3>();
-            services.AddSingleton<IEncryptionService, EncryptionService>();
-            services.AddSingleton<IApiEndpoint, MobileCoachEndpoint>();
-
+            
             services.AddScoped<IMoneyInMerchant, ExampleRedirectMerchant>();
+
+            services.UseMobileCoach(new MobileCoachDirectScale.Config
+            {
+                Token = "8Nzegi_iIgVgwHRiOOZD9_oGp13LkXueLxiS",
+                SecretKey = "mWloZHnf6SOXot1rbPcTrAlGJXAdHTupV7LI",
+                UrlKey = "134a9bac6f4532fe75399b2371377313e780698797b2dc4ba72fbe425da27db4",
+                BaseUrl = "https://qa.mobilecoach.com/widgets/" //"https://admin.mobilecoach.com/widgets/"
+            });
 
             // Transient: Create a new one every time.
             // Singleton: Once in life of service. Cleared when IIS restarts.
             // Scoped: Once per HTTPContext request
-
         }
     }
 }
