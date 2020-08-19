@@ -17,8 +17,8 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.35" />
-    <PackageReference Include="DirectScale.Disco.Extension.Abstractions" Version="1.0.91-feature" />
-    <PackageReference Include="MobileCoach_DirectScale_Integration" Version="1.0.0" />
+    <PackageReference Include="DirectScale.Disco.Extension.Abstractions" Version="1.0.94" />
+    <PackageReference Include="MobileCoach_DirectScale_Integration" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
