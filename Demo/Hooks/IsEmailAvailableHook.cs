@@ -8,19 +8,20 @@ namespace Demo.Hooks
     {
         public IsEmailAvailableHookResponse Invoke(IsEmailAvailableHookRequest request, Func<IsEmailAvailableHookRequest, IsEmailAvailableHookResponse> func)
         {
-            if (request.EmailAddress == "testemail@directscale.com")
+            // Call the original, unhooked function 
+            var response = func(request);
+
+            // Adjust the response of the original function as necessary.
+            if (response.IsAvailable)
             {
-                return new IsEmailAvailableHookResponse
+                if (request.EmailAddress == "testemail@directscale.com")
                 {
-                    IsAvailable = false
-                };
-            } else
-            {
-                return new IsEmailAvailableHookResponse
-                {
-                    IsAvailable = true
-                };
-            } 
+                    response.IsAvailable = false;
+                }
+            }
+            
+            // ... and return the response.
+            return response;
         }
     }
 }
