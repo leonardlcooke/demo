@@ -23,8 +23,20 @@ namespace Demo
             
             services.AddScoped<IMoneyInMerchant, ExampleRedirectMerchant>();
 
+            // Partner implementations here:
+            services.UseMobileCoach(new MobileCoachDirectScale.Config
+            {
+                Token = "8Nzegi_iIgVgwHRiOOZD9_oGp13LkXueLxiS",
+                SecretKey = "mWloZHnf6SOXot1rbPcTrAlGJXAdHTupV7LI",
+                UrlKey = "134a9bac6f4532fe75399b2371377313e780698797b2dc4ba72fbe425da27db4",
+                BaseUrl = "https://qa.mobilecoach.com/widgets/" //"https://admin.mobilecoach.com/widgets/"
+            });
+
             // Simple hook example:
             services.AddTransient<IHook<IsEmailAvailableHookRequest, IsEmailAvailableHookResponse>, IsEmailAvailableHook>();
+
+            // Logging
+            services.AddSingleton<IDiscoExtensionLogger, DiscoExtensionLogger>();
 
             // Transient: Create a new one every time.
             // Singleton: Once in life of service. Cleared when IIS restarts.
