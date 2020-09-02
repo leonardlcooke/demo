@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Demo.Logging
 {
-    interface IDiscoExtensionLogger
+    public interface IDiscoExtensionLogger
     {
         void LogDebug(string msg);
         void LogInfo(string msg);

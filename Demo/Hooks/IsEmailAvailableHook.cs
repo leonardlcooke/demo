@@ -9,7 +9,7 @@ namespace Demo.Hooks
     {
         private readonly IDiscoExtensionLogger _logger;
         
-        public IsEmailAvailableHook(DiscoExtensionLogger logger)
+        public IsEmailAvailableHook(IDiscoExtensionLogger logger)
         {
             _logger = logger;
         }
