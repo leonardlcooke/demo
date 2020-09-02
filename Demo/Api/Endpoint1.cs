@@ -10,13 +10,11 @@ namespace Demo.Api
     {
         private readonly IAssociateService _associateService;
         private readonly IRequestParsingService _requestParsing;
-        private readonly IDataService _dataService;
 
-        public Endpoint1(IAssociateService associateService, IDataService dataService, IRequestParsingService requestParsing)
+        public Endpoint1(IAssociateService associateService, IRequestParsingService requestParsing)
         {
             _associateService = associateService;
             _requestParsing = requestParsing;
-            _dataService = dataService;
         }
 
         public ApiDefinition GetDefinition()
@@ -30,16 +28,18 @@ namespace Demo.Api
 
         public IApiResponse Post(ApiRequest request)
         {
-            using (var dbConnection = new System.Data.SqlClient.SqlConnection(_dataService.ConnectionString.ConnectionString))
+            //using (var dbConnection = new System.Data.SqlClient.SqlConnection(_dataService.ConnectionString.ConnectionString))
             {
                 var rObject = _requestParsing.ParseBody<E1Request>(request);
                 //var aName = _associateService.GetAssociate(rObject.BackOfficeId).Name;
 
-                var sql = $"select FirstName, LastName, BackOfficeId from CRM_Distributors where recordnumber = '{rObject.BackOfficeId}'"; //Note. This is subject to SQL Injection. Do not use in production.
-                var qryRes = dbConnection.Query<QryResult>(sql).FirstOrDefault();
-                var aName = $"{qryRes.FirstName} {qryRes.LastName}";
+                //var sql = $"select FirstName, LastName, BackOfficeId from CRM_Distributors where recordnumber = '{rObject.BackOfficeId}'"; //Note. This is subject to SQL Injection. Do not use in production.
+                //var qryRes = dbConnection.Query<QryResult>(sql).FirstOrDefault();
+                //var aName = $"{qryRes.FirstName} {qryRes.LastName}";
 
-                return new Ok(new { Status = 1, RequestMessage = rObject.Message, AssociateName = aName });
+                var info = _associateService.GetAssociate(rObject.BackOfficeId);
+
+                return new Ok(new { Status = 1, RequestMessage = $"Updated {rObject.Message}", AssociateName = info.Name });
             }
         }
     }
