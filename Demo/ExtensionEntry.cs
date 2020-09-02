@@ -26,9 +26,6 @@ namespace Demo
             // Simple hook example:
             services.AddTransient<IHook<IsEmailAvailableHookRequest, IsEmailAvailableHookResponse>, IsEmailAvailableHook>();
 
-            // Logging
-            services.AddSingleton<IDiscoExtensionLogger, DiscoExtensionLogger>();
-
             // Transient: Create a new one every time.
             // Singleton: Once in life of service. Cleared when IIS restarts.
             // Scoped: Once per HTTPContext request
