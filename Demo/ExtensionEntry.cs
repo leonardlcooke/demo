@@ -15,6 +15,9 @@ namespace Demo
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            // Logging
+            services.AddSingleton<IDiscoExtensionLogger, DiscoExtensionLogger>();
+
             services.AddSingleton<IDemoService, DemoService>();
 
             services.AddSingleton<IApiEndpoint, Endpoint1>();
@@ -34,9 +37,6 @@ namespace Demo
 
             // Simple hook example:
             services.AddTransient<IHook<IsEmailAvailableHookRequest, IsEmailAvailableHookResponse>, IsEmailAvailableHook>();
-
-            // Logging
-            services.AddSingleton<IDiscoExtensionLogger, DiscoExtensionLogger>();
 
             // Transient: Create a new one every time.
             // Singleton: Once in life of service. Cleared when IIS restarts.
