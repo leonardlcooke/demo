@@ -11,11 +11,14 @@ namespace Demo.Api
     {
         private readonly IAssociateService _associateService;
         private readonly IRequestParsingService _requestParsing;
+        private readonly IDiscoExtensionLogger _logger;
 
         public Endpoint1(IAssociateService associateService, IRequestParsingService requestParsing, IDiscoExtensionLogger logger)
         {
             _associateService = associateService;
             _requestParsing = requestParsing;
+            _logger = logger;
+
         }
 
         public ApiDefinition GetDefinition()
