@@ -18,7 +18,6 @@ namespace Demo.Api
             _associateService = associateService;
             _requestParsing = requestParsing;
             _logger = logger;
-
         }
 
         public ApiDefinition GetDefinition()

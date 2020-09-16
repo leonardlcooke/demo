@@ -5,11 +5,11 @@ using DirectScale.Disco.Extension.Hooks.Associates.Enrollment;
 
 namespace Demo.Hooks
 {
-    public class IsEmailAvailableHook : IHook<IsEmailAvailableHookRequest, IsEmailAvailableHookResponse>
+    public class IsEmailAvailable : IHook<IsEmailAvailableHookRequest, IsEmailAvailableHookResponse>
     {
         private readonly IDiscoExtensionLogger _logger;
         
-        public IsEmailAvailableHook(IDiscoExtensionLogger logger)
+        public IsEmailAvailable(IDiscoExtensionLogger logger)
         {
             _logger = logger;
         }

@@ -8,6 +8,8 @@ using MobileCoach;
 using DirectScale.Disco.Extension.Hooks.Associates.Enrollment;
 using Demo.Hooks;
 using Demo.Logging;
+using FlexPay;
+using DirectScale.Disco.Extension.Hooks.Orders;
 
 namespace Demo
 {
@@ -36,7 +38,15 @@ namespace Demo
             });
 
             // Simple hook example:
-            services.AddTransient<IHook<IsEmailAvailableHookRequest, IsEmailAvailableHookResponse>, IsEmailAvailableHook>();
+            services.AddTransient<IHook<IsEmailAvailableHookRequest, IsEmailAvailableHookResponse>, IsEmailAvailable>();
+
+            //
+            // FlexPay Additions
+            //
+            services.AddTransient<IHook<RefundPaymentHookRequest, RefundPaymentHookResponse>, RefundPayment>();
+            services.AddTransient<IHook<FinalizeNonAcceptedOrderHookRequest, FinalizeNonAcceptedOrderHookResponse>, FinalizeNonAcceptedOrder>();
+            services.AddTransient<IHook<FinalizeAcceptedOrderHookRequest, FinalizeAcceptedOrderHookResponse>, FinalizeAcceptedOrder>();
+            services.UseFlexPay();
 
             // Transient: Create a new one every time.
             // Singleton: Once in life of service. Cleared when IIS restarts.
