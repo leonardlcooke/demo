@@ -22,12 +22,32 @@ namespace Demo.Api
                     throw new Exception("Expected Exception");
                 }
 
-                using (_logger.BeginScope("TestScope"))
+                using (_logger.BeginScope("Test order {OrderId} for customer {CustomerId}", 54, 12345))
                 {
                     var eventId = new EventId(2, "Test Event");
                     _logger.Log(request.LogLevel, eventId, request.Message, new object[] { "Obj1", DateTime.Now });
 
                     _logger.LogInformation("In scope");
+                }
+
+                using (_logger.BeginScope(new System.Collections.Generic.Dictionary<string, object>
+                {
+                    ["CustomerId"] = 12345,
+                    ["OrderId"] = 54
+                }))
+                {
+                    _logger.LogInformation("Processing credit card payment");
+                }
+
+                using (_logger.BeginScope(42))
+                {
+                    using (_logger.BeginScope("Example"))
+                    {
+                        using (_logger.BeginScope("https://example.com"))
+                        {
+                            _logger.LogInformation("Hello, world!");
+                        }
+                    }
                 }
 
                 _logger.LogInformation("After scope");
