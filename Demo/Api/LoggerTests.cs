@@ -22,8 +22,15 @@ namespace Demo.Api
                     throw new Exception("Expected Exception");
                 }
 
-                var eventId = new EventId(2, "Test Event");
-                _logger.Log(request.LogLevel, eventId, request.Message, new object[] { "Obj1", DateTime.Now });
+                using (_logger.BeginScope("TestScope"))
+                {
+                    var eventId = new EventId(2, "Test Event");
+                    _logger.Log(request.LogLevel, eventId, request.Message, new object[] { "Obj1", DateTime.Now });
+
+                    _logger.LogInformation("In scope");
+                }
+
+                _logger.LogInformation("After scope");
             }
             catch (Exception ex)
             {
