@@ -10,6 +10,7 @@ using Demo.Hooks;
 using Demo.Logging;
 using FlexPay;
 using DirectScale.Disco.Extension.Hooks.Orders;
+using DirectScale.Disco.Extension.Hooks.Associates;
 
 namespace Demo
 {
@@ -40,6 +41,7 @@ namespace Demo
 
             // Simple hook example:
             services.AddTransient<IHook<IsEmailAvailableHookRequest, IsEmailAvailableHookResponse>, IsEmailAvailable>();
+            services.AddTransient<IHook<UpdateAssociateHookRequest, UpdateAssociateHookResponse>, UpdateAssociate>();
 
             //
             // FlexPay Additions
