@@ -20,7 +20,7 @@ namespace Demo.Hooks
             {
                 if (request.UpdatedAssociateInfo.AssociateId == 2)
                 {
-                    throw new Exception("This was inside the UpdateAssociate hook.");
+                    throw new NonSerializableGenericException("This was inside the UpdateAssociate hook.");
                 }
                 else if (request.UpdatedAssociateInfo.AssociateId == 1)
                 {
@@ -36,6 +36,16 @@ namespace Demo.Hooks
             {
                 _logger.LogError(ex, ex.Message);
                 throw;
+            }
+        }
+
+
+        //This exception is not marked as serializable.  This is to test what happens when an exception is not passed to the domain.
+        public class NonSerializableGenericException : Exception
+        {
+            public NonSerializableGenericException(string message) : base(message)
+            {
+
             }
         }
     }
