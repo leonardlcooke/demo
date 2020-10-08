@@ -27,9 +27,13 @@ namespace Demo.Hooks
                     UpdateAssociateHookResponse nullResponse = null;
 
                     //This line should throw a null reference exception.
-                    nullResponse j 
-                        .ToString();
+                    nullResponse.ToString();
                 }
+
+                request.UpdatedAssociateInfo.Custom.Field1 = Environment.MachineName;
+                request.UpdatedAssociateInfo.Custom.Field2 = Environment.CurrentDirectory;
+                request.UpdatedAssociateInfo.Custom.Field3 = Environment.Version.ToString();
+                request.UpdatedAssociateInfo.Custom.Field3 = Environment.UserInteractive.ToString();
 
                 return func(request);
             }
