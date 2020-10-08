@@ -27,7 +27,8 @@ namespace Demo.Hooks
                     UpdateAssociateHookResponse nullResponse = null;
 
                     //This line should throw a null reference exception.
-                    nullResponse.ToString();
+                    nullResponse j 
+                        .ToString();
                 }
 
                 return func(request);
