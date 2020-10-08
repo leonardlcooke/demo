@@ -27,6 +27,7 @@ namespace Demo
             services.AddSingleton<IApiEndpoint, Endpoint2>();
             services.AddSingleton<IApiEndpoint, Endpoint3>();
             services.AddSingleton<IApiEndpoint, LoggerTests>();
+            services.AddSingleton<IApiEndpoint, GetExtensionContext>();
 
             services.AddScoped<IMoneyInMerchant, ExampleRedirectMerchant>();
 
