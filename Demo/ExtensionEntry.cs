@@ -34,10 +34,10 @@ namespace Demo
             // Partner implementations here:
             services.UseMobileCoach(new MobileCoachDirectScale.Config
             {
-                Token = "8Nzegi_iIgVgwHRiOOZD9_oGp13LkXueLxiS",
-                SecretKey = "mWloZHnf6SOXot1rbPcTrAlGJXAdHTupV7LI",
-                UrlKey = "134a9bac6f4532fe75399b2371377313e780698797b2dc4ba72fbe425da27db4",
-                BaseUrl = "https://qa.mobilecoach.com/widgets/" //"https://admin.mobilecoach.com/widgets/"
+                Token = "jFFLVWmeIvmyxBD3zCUnubO0DYNoluRplWqS",
+                SecretKey = "NDPWvj1Tm1doSfKgNJ2v3Z0yxJotG3iaenbZ",
+                UrlKey = "6273b89386aa97020d7590e3a36dc888eae0096d474bab915b0aa89b82138dac",
+                BaseUrl = "https://admin.mobilecoach.com/widgets/" // "https://qa.mobilecoach.com/widgets/"
             });
 
             // Simple hook example:
