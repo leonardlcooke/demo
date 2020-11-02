@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Demo.Logging;
 using DirectScale.Disco.Extension.Api;
 using DirectScale.Disco.Extension.Services;
 using System.Data;
@@ -11,9 +10,9 @@ namespace Demo.Api
     {
         private readonly IAssociateService _associateService;
         private readonly IRequestParsingService _requestParsing;
-        private readonly IDiscoExtensionLogger _logger;
+        private readonly ILoggingService _logger;
 
-        public Endpoint1(IAssociateService associateService, IRequestParsingService requestParsing, IDiscoExtensionLogger logger)
+        public Endpoint1(IAssociateService associateService, IRequestParsingService requestParsing, ILoggingService logger)
         {
             _associateService = associateService;
             _requestParsing = requestParsing;

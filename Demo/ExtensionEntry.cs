@@ -7,10 +7,10 @@ using Demo.Merchants;
 using MobileCoach;
 using DirectScale.Disco.Extension.Hooks.Associates.Enrollment;
 using Demo.Hooks;
-using Demo.Logging;
-using FlexPay;
+//using FlexPay;
 using DirectScale.Disco.Extension.Hooks.Orders;
 using DirectScale.Disco.Extension.Hooks.Associates;
+using BraintreeDS;
 
 namespace Demo
 {
@@ -18,18 +18,21 @@ namespace Demo
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            // Logging
-            services.AddSingleton<IDiscoExtensionLogger, DiscoExtensionLogger>();
-
             services.AddSingleton<IDemoService, DemoService>();
+            
+            // Money-in Integration Test
+            services.UseBraintree(new BraintreeSettings
+                (useHardcodedTestCreds: true, discoMerchId: BraintreeSettings.BRAINTREE_USD_DISCO_MERCHANTID)
+            { } // Here, the caller will provide all the required fields for the USD braintree implementation. Without them and a "true" useHardcodedTestCreds + merch ID, it'll use DS sandbox values.              
+            );
 
+            services.AddScoped<IMoneyInMerchant, ExampleRedirectMerchant>();
+            
             services.AddSingleton<IApiEndpoint, Endpoint1>();
             services.AddSingleton<IApiEndpoint, Endpoint2>();
             services.AddSingleton<IApiEndpoint, Endpoint3>();
             services.AddSingleton<IApiEndpoint, LoggerTests>();
             services.AddSingleton<IApiEndpoint, GetExtensionContext>();
-
-            services.AddScoped<IMoneyInMerchant, ExampleRedirectMerchant>();
 
             // Partner implementations here:
             services.UseMobileCoach(new MobileCoachDirectScale.Config
@@ -50,7 +53,7 @@ namespace Demo
             services.AddTransient<IHook<RefundPaymentHookRequest, RefundPaymentHookResponse>, RefundPayment>();
             services.AddTransient<IHook<FinalizeNonAcceptedOrderHookRequest, FinalizeNonAcceptedOrderHookResponse>, FinalizeNonAcceptedOrder>();
             services.AddTransient<IHook<FinalizeAcceptedOrderHookRequest, FinalizeAcceptedOrderHookResponse>, FinalizeAcceptedOrder>();
-            services.UseFlexPay();
+            //services.UseFlexPay();
 
             // Transient: Create a new one every time.
             // Singleton: Once in life of service. Cleared when IIS restarts.

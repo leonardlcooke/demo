@@ -2,26 +2,29 @@
 using DirectScale.Disco.Extension.Hooks;
 using DirectScale.Disco.Extension.Hooks.Orders;
 using DirectScale.Disco.Extension.Services;
-using FlexPay;
+//using FlexPay;
 
 namespace Demo.Hooks
 {
     public class FinalizeNonAcceptedOrder : IHook<FinalizeNonAcceptedOrderHookRequest, FinalizeNonAcceptedOrderHookResponse>
     {
-        private readonly IFlexPayService _flexPayService;
+        //private readonly IFlexPayService _flexPayService;
         private readonly IOrderService _orderService;
+        private readonly IEventService _eventService;
 
-        public FinalizeNonAcceptedOrder(IFlexPayService flexPayService, IOrderService orderService)
+        public FinalizeNonAcceptedOrder(IOrderService orderService, IEventService eventService)
         {
-            _flexPayService = flexPayService;
+            //_flexPayService = flexPayService;
             _orderService = orderService;
+            _eventService = eventService;
         }
 
         public FinalizeNonAcceptedOrderHookResponse Invoke(FinalizeNonAcceptedOrderHookRequest request, Func<FinalizeNonAcceptedOrderHookRequest, FinalizeNonAcceptedOrderHookResponse> func)
         {
+
             try
             {
-                _flexPayService.GetRecommendation(request.Order, new FlexPay.Models.BillingInfo
+                /*_flexPayService.GetRecommendation(request.Order, new FlexPay.Models.BillingInfo
                 {
                     BillingAddress = new FlexPay.Models.Address
                     {
@@ -37,7 +40,7 @@ namespace Demo.Hooks
                     GatewayCode = "TG",
                     GatewayMessage = "This is a test"
                 }
-                );
+                );*/
             }
             catch (Exception e)
             {

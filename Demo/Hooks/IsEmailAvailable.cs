@@ -1,15 +1,15 @@
 ﻿using System;
-using Demo.Logging;
 using DirectScale.Disco.Extension.Hooks;
 using DirectScale.Disco.Extension.Hooks.Associates.Enrollment;
+using DirectScale.Disco.Extension.Services;
 
 namespace Demo.Hooks
 {
     public class IsEmailAvailable : IHook<IsEmailAvailableHookRequest, IsEmailAvailableHookResponse>
     {
-        private readonly IDiscoExtensionLogger _logger;
+        private readonly ILoggingService _logger;
         
-        public IsEmailAvailable(IDiscoExtensionLogger logger)
+        public IsEmailAvailable(ILoggingService logger)
         {
             _logger = logger;
         }
@@ -29,7 +29,7 @@ namespace Demo.Hooks
                 }
             }
 
-            _logger.LogInfo($"This is a log message! Email Available? {response.IsAvailable}");
+            _logger.LogInformation($"This is a log message! Email Available? {response.IsAvailable}");
 
             // ... and return the response.
             return response;
