@@ -3,7 +3,7 @@ using DirectScale.Disco.Extension;
 
 namespace Demo.Merchants
 {
-    public class ExampleSavedPaymentMerchant : SavedPaymentMoneyInMerchant
+    /*public class ExampleSavedPaymentMerchant : SavedPaymentMoneyInMerchant
     {
         public ExampleSavedPaymentMerchant() : base(
             new MerchantInfo
@@ -30,5 +30,5 @@ namespace Demo.Merchants
         {
             throw new Exception("Unable to Refund Payment");
         }
-    }
+    }*/
 }
