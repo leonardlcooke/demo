@@ -10,7 +10,7 @@ using Demo.Hooks;
 //using FlexPay;
 using DirectScale.Disco.Extension.Hooks.Orders;
 using DirectScale.Disco.Extension.Hooks.Associates;
-//using BraintreeDS;
+using BraintreeDS;
 
 namespace Demo
 {
@@ -21,10 +21,10 @@ namespace Demo
             services.AddSingleton<IDemoService, DemoService>();
             
             // Money-in Integration Test
-           /* services.UseBraintree(new BraintreeSettings
+            services.UseBraintree(new BraintreeSettings
                 (useHardcodedTestCreds: true, discoMerchId: BraintreeSettings.BRAINTREE_USD_DISCO_MERCHANTID)
             { } // Here, the caller will provide all the required fields for the USD braintree implementation. Without them and a "true" useHardcodedTestCreds + merch ID, it'll use DS sandbox values.              
-            );*/
+            );
 
             services.AddScoped<IMoneyInMerchant, ExampleRedirectMerchant>();
             
