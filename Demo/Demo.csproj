@@ -17,8 +17,8 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.35" />
-    <PackageReference Include="Directscale.Braintree" Version="1.0.4" />
-    <PackageReference Include="DirectScale.Disco.Extension.Abstractions" Version="1.0.144-feature" />
+    <PackageReference Include="Directscale.Braintree" Version="1.0.9" />
+    <PackageReference Include="DirectScale.Disco.Extension.Abstractions" Version="1.0.149" />
     <PackageReference Include="FlexPay.DirectScale" Version="1.0.0" />
     <PackageReference Include="MobileCoach_DirectScale_Integration" Version="1.0.4" />
   </ItemGroup>
