@@ -8,15 +8,19 @@ namespace Demo.Hooks
     public class IsEmailAvailable : IHook<IsEmailAvailableHookRequest, IsEmailAvailableHookResponse>
     {
         private readonly ILoggingService _logger;
+        private readonly ISettingsService _settingsService;
         
-        public IsEmailAvailable(ILoggingService logger)
+        public IsEmailAvailable(ILoggingService logger, ISettingsService settingsService)
         {
             _logger = logger;
+            _settingsService = settingsService;
         }
 
         public IsEmailAvailableHookResponse Invoke(IsEmailAvailableHookRequest request, Func<IsEmailAvailableHookRequest, IsEmailAvailableHookResponse> func)
         {
-        
+
+            var et = _settingsService.ExtensionContext().EnvironmentType;
+
             // Call the original, unhooked function 
             var response = func(request);
 
