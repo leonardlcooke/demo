@@ -37,13 +37,8 @@ namespace Demo.Api
                 var rObject = _requestParsing.ParseBody<E1Request>(request);
                 var treeResult = _treeService.GetDownlineIds(new DirectScale.Disco.Extension.NodeId(2), DirectScale.Disco.Extension.TreeType.Unilevel, 100);
 
-                //var aName = _associateService.GetAssociate(rObject.BackOfficeId).Name;
-
-                //var sql = $"select FirstName, LastName, BackOfficeId from CRM_Distributors where recordnumber = '{rObject.BackOfficeId}'"; //Note. This is subject to SQL Injection. Do not use in production.
-                //var qryRes = dbConnection.Query<QryResult>(sql).FirstOrDefault();
-                //var aName = $"{qryRes.FirstName} {qryRes.LastName}";
-
                 var info = _associateService.GetAssociate(rObject.BackOfficeId);
+                var associates = _associateService.GetAssociates(new[] { 1, 2 });
 
                 return new Ok(new { Status = 1, RequestMessage = $"Updated {rObject.Message}. TreeCount: {treeResult.Length}", AssociateName = info.Name });
             }
