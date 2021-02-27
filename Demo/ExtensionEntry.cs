@@ -11,6 +11,7 @@ using Demo.Hooks;
 using DirectScale.Disco.Extension.Hooks.Orders;
 using DirectScale.Disco.Extension.Hooks.Associates;
 using BraintreeDS;
+using NuveiDS;
 
 namespace Demo
 {
@@ -54,7 +55,7 @@ namespace Demo
             services.AddTransient<IHook<FinalizeNonAcceptedOrderHookRequest, FinalizeNonAcceptedOrderHookResponse>, FinalizeNonAcceptedOrder>();
             services.AddTransient<IHook<FinalizeAcceptedOrderHookRequest, FinalizeAcceptedOrderHookResponse>, FinalizeAcceptedOrder>();
             //services.UseFlexPay();
-
+            services.UseNuvei();
             // Transient: Create a new one every time.
             // Singleton: Once in life of service. Cleared when IIS restarts.
             // Scoped: Once per HTTPContext request
